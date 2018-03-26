@@ -1,0 +1,113 @@
+#calc {
+    max-width: 100%;
+    margin: 0 auto;
+   
+}
+
+#calcButtons {
+    display: grid;
+    grid-template-columns: repeat(4 ,1fr);
+    grid-template-rows: repeat(6, 1fr);
+    max-width: 100%;
+    grid-gap: 0;
+    margin: 0 auto;
+}
+
+#calcButtons MyButton {
+    padding: 20px;
+    background-color: brown;
+}
+
+.equals{
+grid-column: 4/5;
+grid-row:5/7;
+height: 200px;
+}
+
+
+
+.infobar{
+    grid-column: 1/5;
+    grid-row:1/1;
+}
+
+.plus{
+    grid-column: 4/5;
+    grid-row:4/5;
+}
+
+.minus{ 
+    grid-column: 4/5;
+    grid-row:3/4
+}
+
+.divide{
+    grid-column: 3/3;
+    grid-row: 2/2;
+}
+.multiply{
+    grid-column:2/2;
+    grid-row:2/2;
+}
+
+.backspace{
+    grid-column:4/5;
+    grid-row:2/3;
+}
+.dot{
+    grid-column: 3/3;
+    grid-row: 6/7;
+}
+.modulo {
+    grid-column: 1/1;
+    grid-row: 6/7;
+}
+.clear{
+    grid-column:1/1;
+    grid-row:2/2;
+}
+
+.zero{
+    grid-column: 2/3;
+    grid-row:6/7;
+}
+
+.one{
+    grid-column: 1/2;
+    grid-row: 5/6;
+}
+.two {
+    grid-column: 2/3;
+    grid-row: 5/6;
+}
+.three{
+    grid-column: 3/4;
+    grid-row: 5/6;
+}
+.six{
+    grid-column: 3/4;
+    grid-row:4/6;
+}
+.five {
+    grid-column: 2/3;
+    grid-row: 4/5;
+}
+.four{
+    grid-column: 1/2;
+    grid-row:4/5;
+}
+
+.seven{
+    grid-column: 1/2;
+    grid-row:3/4;
+}
+.eight{
+    grid-column: 2/3;
+    grid-row:3/4;
+}
+.nine{
+    grid-column: 3/4;
+    grid-row:3/4;
+
+}
+
