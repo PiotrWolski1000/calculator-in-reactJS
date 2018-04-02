@@ -4,7 +4,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import './App.css';
 
-
 const styleNumericButtons = {
   height: 100,
 };
@@ -12,8 +11,13 @@ const styleEquals = {
   height: 200,
 };
 
-
-
+const operators = [
+  '+', 
+  '*',
+  '/',
+  '.',
+  '%',
+  '-']
 
 class Calc extends React.Component {
   constructor(props) {
@@ -22,42 +26,83 @@ class Calc extends React.Component {
     this.state = {
       equation: ''
     }
-
-    this.handleChange = this.handleChange.bind(this)
-
-  
   }
-  handleChange (e) {
-    this.setState({
-      equation: e.target.value
+  
+  calculate = () => {
+
+
+    if(!this.state.equation)
+      return 0;
+    else{
+      let myEquation = this.state.equation.toString();
+
+      myEquation = eval(myEquation);
+
+      this.setState(() => {
+        return(
+          {
+            equation: myEquation
+          }
+        )
+      })
+    }
+  }
+
+  clear = () => {
+    this.setState(() => {
+      return(
+        {
+          equation: ''
+        }
+      )
     })
   }
-  
-  addParam = (e) => {
-    let newValue = (this.state.equation).toString() + e.toString();
-    
-    this.setState({
-      equation: newValue
-    });
+
+  deleteLast = () => {
+
+    if(!this.state.equation)
+      return 0;
+
+    let myEquation = this.state.equation.toString().substring(0, this.state.equation.length - 1);;
+    if(this.state.equation)
+      this.setState(() => {
+        return({
+          equation: myEquation
+          })
+      })
   }
 
 
+  
+  addParam = (e) => {
+
+    if(!this.state.equation && operators.includes(e)){//if equation is empty and trying to insert operator symbol, return null
+      return;
+    } else if(operators.includes(e) &&
+      operators.includes(this.state.equation[this.state.equation.length-1])
+      ){//here we are checking if the last element of equation isnt an operator
+        return;
+    } else {
+      let newValue = this.state.equation.toString() + e.toString();
+      
+      this.setState({
+        equation: newValue
+      });            
+    }  
+  }
+  
   render() {
     return (
       <MuiThemeProvider>
         <div id='calc'>
           <div id='calcButtons'>
-    
-
-    
+          
           <TextField
             className = 'infobar'
             hintText='Please, insert your equation'
             fullWidth={true}
             value={this.state.equation}
-            onChange={this.handleChange}
           />
-
 
           <RaisedButton style = {styleNumericButtons} className = 'addParam' primary={true}  value = {1} label='1' onClick={(e) => this.addParam(1)}/> 
           <RaisedButton style = {styleNumericButtons} className = 'two' primary={true}  value = {2} label='2' onClick={(e) => this.addParam(2)}/>
@@ -79,11 +124,9 @@ class Calc extends React.Component {
           <RaisedButton className = 'divide' primary={true} style={styleNumericButtons} label='/' onClick = {(e) => this.addParam('/')}/>
           <RaisedButton className = 'dot' primary={true} style={styleNumericButtons} label='.' onClick = {(e) => this.addParam('.')}/>
           <RaisedButton className = 'clear' primary={true} style={styleNumericButtons} label='CE' onClick = {this.clear}/>
-          <RaisedButton className = 'modulo' primary={true} style={styleNumericButtons}  label='%' onClick = {(e) => this.addParam('%')}/>
+          <RaisedButton className = 'modulo' primary={true} style={styleNumericButtons}  label=' % ' onClick = {(e) => this.addParam('%')}/>
           <RaisedButton className = 'backspace' primary={true} style={styleNumericButtons} label='<=' onClick = {this.deleteLast}/>
           <RaisedButton className = 'equals' label='=' style={styleEquals} secondary={true} onClick = {this.calculate}/>
-
-
 
           </div>
         </div>
